@@ -110,79 +110,125 @@
   </thead>
   <tbody>
 
-    <!-- CONFIGURATION -->
-    <tr><td data-label="Command">git config --global user.name "Name"</td><td data-label="What it Does">Set your Git username globally</td><td data-label="Example">git config --global user.name "Manoj"</td></tr>
-    <tr><td data-label="Command">git config --global user.email "email@example.com"</td><td data-label="What it Does">Set your Git email globally</td><td data-label="Example">git config --global user.email "manoj@example.com"</td></tr>
+  <!-- CONFIGURATION -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🔧 Git Configuration</td></tr>
+  <tr><td data-label="Command">git config --global user.name "Name"</td><td data-label="What it Does">Set your Git username globally</td><td data-label="Example">git config --global user.name "Manoj"</td></tr>
+  <tr><td data-label="Command">git config --global user.email "email@example.com"</td><td data-label="What it Does">Set your Git email globally</td><td data-label="Example">git config --global user.email "manoj@example.com"</td></tr>
 
-    <!-- START A WORKING AREA -->
-    <tr><td data-label="Command">git init</td><td data-label="What it Does">Initialize a new Git repository</td><td data-label="Example">git init</td></tr>
-    <tr><td data-label="Command">git clone &lt;repo-url&gt;</td><td data-label="What it Does">Clone a remote repository locally</td><td data-label="Example">git clone https://github.com/user/repo.git</td></tr>
+  <!-- START A WORKING AREA -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">📁 Start a Working Area</td></tr>
+  <tr><td data-label="Command">git init</td><td data-label="What it Does">Initialize a new Git repository</td><td data-label="Example">git init</td></tr>
+  <tr><td data-label="Command">git clone &lt;repo-url&gt;</td><td data-label="What it Does">Clone a remote repository locally</td><td data-label="Example">git clone https://github.com/user/repo.git</td></tr>
 
-    <!-- WORK ON THE CURRENT CHANGE -->
-    <tr><td data-label="Command">git status</td><td data-label="What it Does">Show current repo status (changes, branch)</td><td data-label="Example">git status</td></tr>
-    <tr><td data-label="Command">git add &lt;file&gt;</td><td data-label="What it Does">Stage a file for commit</td><td data-label="Example">git add README.md</td></tr>
-    <tr><td data-label="Command">git add .</td><td data-label="What it Does">Stage all changes</td><td data-label="Example">git add .</td></tr>
-    <tr><td data-label="Command">git mv &lt;old&gt; &lt;new&gt;</td><td data-label="What it Does">Move or rename a file, directory, or symlink</td><td data-label="Example">git mv old.txt new.txt</td></tr>
-    <tr><td data-label="Command">git restore &lt;file&gt;</td><td data-label="What it Does">Restore working tree files</td><td data-label="Example">git restore index.html</td></tr>
-    <tr><td data-label="Command">git rm &lt;file&gt;</td><td data-label="What it Does">Remove files from the working tree and index</td><td data-label="Example">git rm index.html</td></tr>
+  <!-- WORK ON THE CURRENT CHANGE -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🛠️ Work on the Current Change</td></tr>
+  <tr><td data-label="Command">git status</td><td data-label="What it Does">Show current repo status (changes, branch)</td><td data-label="Example">git status</td></tr>
+  <tr><td data-label="Command">git add &lt;file&gt;</td><td data-label="What it Does">Stage a file for commit</td><td data-label="Example">git add README.md</td></tr>
+  <tr><td data-label="Command">git add .</td><td data-label="What it Does">Stage all changes</td><td data-label="Example">git add .</td></tr>
+  <tr><td data-label="Command">git mv &lt;old&gt; &lt;new&gt;</td><td data-label="What it Does">Move or rename a file, directory, or symlink</td><td data-label="Example">git mv old.txt new.txt</td></tr>
+  <tr><td data-label="Command">git restore &lt;file&gt;</td><td data-label="What it Does">Restore working tree files</td><td data-label="Example">git restore index.html</td></tr>
+  <tr><td data-label="Command">git rm &lt;file&gt;</td><td data-label="What it Does">Remove files from the working tree and index</td><td data-label="Example">git rm index.html</td></tr>
 
-    <!-- COMMITTING -->
-    <tr><td data-label="Command">git commit -m "message"</td><td data-label="What it Does">Commit staged changes with message</td><td data-label="Example">git commit -m "Initial commit"</td></tr>
-    <tr><td data-label="Command">git commit -m &quot;msg&quot;</td><td data-label="What it Does">Record changes to the repository</td><td data-label="Example">git commit -m "Add new feature"</td></tr>
+  <!-- COMMITTING -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">✅ Committing Changes</td></tr>
+  <tr><td data-label="Command">git commit -m "message"</td><td data-label="What it Does">Commit staged changes with message</td><td data-label="Example">git commit -m "Initial commit"</td></tr>
+  <tr><td data-label="Command">git commit -m &quot;msg&quot;</td><td data-label="What it Does">Record changes to the repository</td><td data-label="Example">git commit -m "Add new feature"</td></tr>
 
-    <!-- HISTORY & STATE -->
-    <tr><td data-label="Command">git log</td><td data-label="What it Does">Show commit history</td><td data-label="Example">git log</td></tr>
-    <tr><td data-label="Command">git log --oneline --all</td><td data-label="What it Does">Show all commits in all branches, brief</td><td data-label="Example">git log --oneline --all</td></tr>
-    <tr><td data-label="Command">git show</td><td data-label="What it Does">Show various types of objects (commits, tags, etc.)</td><td data-label="Example">git show HEAD</td></tr>
-    <tr><td data-label="Command">git diff</td><td data-label="What it Does">Show changes between commits or working tree</td><td data-label="Example">git diff HEAD~1 HEAD</td></tr>
-    <tr><td data-label="Command">git grep &quot;text&quot;</td><td data-label="What it Does">Search tracked files for a string or pattern</td><td data-label="Example">git grep "function"</td></tr>
-    <tr><td data-label="Command">git reflog</td><td data-label="What it Does">Show recent HEAD movements (recover commits)</td><td data-label="Example">git reflog</td></tr>
-    <tr><td data-label="Command">git bisect</td><td data-label="What it Does">Find the commit that introduced a bug using binary search</td><td data-label="Example">git bisect start</td></tr>
+  <!-- HISTORY & STATE -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">📜 History & State</td></tr>
+  <tr><td data-label="Command">git log</td><td data-label="What it Does">Show commit history</td><td data-label="Example">git log</td></tr>
+  <tr><td data-label="Command">git log --oneline --all</td><td data-label="What it Does">Show all commits in all branches, brief</td><td data-label="Example">git log --oneline --all</td></tr>
+  <tr><td data-label="Command">git show</td><td data-label="What it Does">Show various types of objects (commits, tags, etc.)</td><td data-label="Example">git show HEAD</td></tr>
+  <tr><td data-label="Command">git diff</td><td data-label="What it Does">Show changes between commits or working tree</td><td data-label="Example">git diff HEAD~1 HEAD</td></tr>
+  <tr><td data-label="Command">git grep &quot;text&quot;</td><td data-label="What it Does">Search tracked files for a string or pattern</td><td data-label="Example">git grep "function"</td></tr>
+  <tr><td data-label="Command">git reflog</td><td data-label="What it Does">Show recent HEAD movements (recover commits)</td><td data-label="Example">git reflog</td></tr>
+  <tr><td data-label="Command">git bisect</td><td data-label="What it Does">Find the commit that introduced a bug using binary search</td><td data-label="Example">git bisect start</td></tr>
 
-    <!-- BRANCHING -->
-    <tr><td data-label="Command">git branch</td><td data-label="What it Does">List all local branches</td><td data-label="Example">git branch</td></tr>
-    <tr><td data-label="Command">git branch -a</td><td data-label="What it Does">List all branches (local + remote)</td><td data-label="Example">git branch -a</td></tr>
-    <tr><td data-label="Command">git branch -d &lt;branch-name&gt;</td><td data-label="What it Does">Delete a local branch</td><td data-label="Example">git branch -d feature-x</td></tr>
-    <tr><td data-label="Command">git switch &lt;branch&gt;</td><td data-label="What it Does">Switch branches</td><td data-label="Example">git switch feature</td></tr>
-    <tr><td data-label="Command">git checkout &lt;branch-name&gt;</td><td data-label="What it Does">Switch to a branch</td><td data-label="Example">git checkout master</td></tr>
-    <tr><td data-label="Command">git checkout -b &lt;new-branch&gt;</td><td data-label="What it Does">Create and switch to new branch</td><td data-label="Example">git checkout -b feature-x</td></tr>
+  <!-- BRANCHING -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🌿 Branching</td></tr>
+  <tr><td data-label="Command">git branch</td><td data-label="What it Does">List all local branches</td><td data-label="Example">git branch</td></tr>
+  <tr><td data-label="Command">git branch -a</td><td data-label="What it Does">List all branches (local + remote)</td><td data-label="Example">git branch -a</td></tr>
+  <tr><td data-label="Command">git branch -d &lt;branch-name&gt;</td><td data-label="What it Does">Delete a local branch</td><td data-label="Example">git branch -d feature-x</td></tr>
+  <tr><td data-label="Command">git switch &lt;branch&gt;</td><td data-label="What it Does">Switch branches</td><td data-label="Example">git switch feature</td></tr>
+  <tr><td data-label="Command">git checkout &lt;branch-name&gt;</td><td data-label="What it Does">Switch to a branch</td><td data-label="Example">git checkout master</td></tr>
+  <tr><td data-label="Command">git checkout -b &lt;new-branch&gt;</td><td data-label="What it Does">Create and switch to new branch</td><td data-label="Example">git checkout -b feature-x</td></tr>
 
-    <!-- MERGING & REBASING -->
-    <tr><td data-label="Command">git merge &lt;branch&gt;</td><td data-label="What it Does">Join two or more development histories together</td><td data-label="Example">git merge dev</td></tr>
-    <tr><td data-label="Command">git merge &lt;branch-name&gt;</td><td data-label="What it Does">Merge another branch into current</td><td data-label="Example">git merge feature-x</td></tr>
-    <tr><td data-label="Command">git rebase &lt;base&gt;</td><td data-label="What it Does">Reapply commits on top of another base tip</td><td data-label="Example">git rebase main</td></tr>
+  <!-- MERGING & REBASING -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🔀 Merging & Rebasing</td></tr>
+  <tr><td data-label="Command">git merge &lt;branch&gt;</td><td data-label="What it Does">Join two or more development histories together</td><td data-label="Example">git merge dev</td></tr>
+  <tr><td data-label="Command">git merge &lt;branch-name&gt;</td><td data-label="What it Does">Merge another branch into current</td><td data-label="Example">git merge feature-x</td></tr>
+  <tr><td data-label="Command">git rebase &lt;base&gt;</td><td data-label="What it Does">Reapply commits on top of another base tip</td><td data-label="Example">git rebase main</td></tr>
 
-    <!-- RESET, REVERT & STASH -->
-    <tr><td data-label="Command">git reset --soft &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep staged changes</td><td data-label="Example">git reset --soft 5b5139a</td></tr>
-    <tr><td data-label="Command">git reset --mixed &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep unstaged changes</td><td data-label="Example">git reset --mixed 5b5139a</td></tr>
-    <tr><td data-label="Command">git reset --hard &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, discard changes</td><td data-label="Example">git reset --hard 5b5139a</td></tr>
-    <tr><td data-label="Command">git reset --hard &lt;commit&gt;</td><td data-label="What it Does">Reset current HEAD to the specified state</td><td data-label="Example">git reset --hard HEAD~1</td></tr>
-    <tr><td data-label="Command">git revert &lt;commit-id&gt;</td><td data-label="What it Does">Undo a commit by creating a new commit</td><td data-label="Example">git revert 5b5139a</td></tr>
-    <tr><td data-label="Command">git stash</td><td data-label="What it Does">Temporarily save uncommitted changes</td><td data-label="Example">git stash</td></tr>
-    <tr><td data-label="Command">git stash pop</td><td data-label="What it Does">Apply stashed changes back</td><td data-label="Example">git stash pop</td></tr>
+  <!-- RESET, REVERT & STASH -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">♻️ Reset, Revert & Stash</td></tr>
+  <tr><td data-label="Command">git reset --soft &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep staged changes</td><td data-label="Example">git reset --soft 5b5139a</td></tr>
+  <tr><td data-label="Command">git reset --mixed &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep unstaged changes</td><td data-label="Example">git reset --mixed 5b5139a</td></tr>
+  <tr><td data-label="Command">git reset --hard &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, discard changes</td><td data-label="Example">git reset --hard 5b5139a</td></tr>
+  <tr><td data-label="Command">git reset --hard &lt;commit&gt;</td><td data-label="What it Does">Reset current HEAD to the specified state</td><td data-label="Example">git reset --hard HEAD~1</td></tr>
+  <tr><td data-label="Command">git revert &lt;commit-id&gt;</td><td data-label="What it Does">Undo a commit by creating a new commit</td><td data-label="Example">git revert 5b5139a</td></tr>
+  <tr><td data-label="Command">git stash</td><td data-label="What it Does">Temporarily save uncommitted changes</td><td data-label="Example">git stash</td></tr>
+  <tr><td data-label="Command">git stash pop</td><td data-label="What it Does">Apply stashed changes back</td><td data-label="Example">git stash pop</td></tr>
 
-    <!-- TAGGING -->
-    <tr><td data-label="Command">git tag &lt;tagname&gt;</td><td data-label="What it Does">Create a tag</td><td data-label="Example">git tag v1.0 + git push origin v1.0</td></tr>
+  <!-- TAGGING -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🏷️ Tagging</td></tr>
+  <tr><td data-label="Command">git tag &lt;tagname&gt;</td><td data-label="What it Does">Create a tag</td><td data-label="Example">git tag v1.0 + git push origin v1.0</td></tr>
 
-    <!-- REMOTES -->
-    <tr><td data-label="Command">git remote -v</td><td data-label="What it Does">Show remote repository URLs</td><td data-label="Example">git remote -v</td></tr>
+  <!-- REMOTES -->
+  <!-- REMOTE SETUP -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">🌐 Remote Setup</td></tr>
+<tr><td data-label="Command">git remote add origin &lt;url&gt;</td><td data-label="What it Does">Adds a remote named origin pointing to your repo</td><td data-label="Example">git remote add origin https://github.com/username/repo.git</td></tr>
+<tr><td data-label="Command">git remote -v</td><td data-label="What it Does">Verifies the remote URL(s)</td><td data-label="Example">git remote -v</td></tr>
+<tr><td data-label="Command">git push -u origin &lt;branch&gt;</td><td data-label="What it Does">Pushes code to remote and sets upstream tracking</td><td data-label="Example">git push -u origin master</td></tr>
+<tr><td data-label="Command">git remote remove origin</td><td data-label="What it Does">Removes the remote named origin</td><td data-label="Example">git remote remove origin</td></tr>
+<tr><td data-label="Command">git remote rename &lt;old&gt; &lt;new&gt;</td><td data-label="What it Does">Renames a remote</td><td data-label="Example">git remote rename origin upstream</td></tr>
+<tr><td data-label="Command">git remote set-url origin &lt;new-url&gt;</td><td data-label="What it Does">Changes the URL of a remote</td><td data-label="Example">git remote set-url origin https://new.url/repo.git</td></tr>
 
-    <!-- PUSH / PULL / FETCH -->
-    <tr><td data-label="Command">git fetch</td><td data-label="What it Does">Download objects and refs from another repository</td><td data-label="Example">git fetch origin</td></tr>
-    <tr><td data-label="Command">git pull origin &lt;branch&gt;</td><td data-label="What it Does">Fetch & merge remote changes</td><td data-label="Example">git pull origin master</td></tr>
-    <tr><td data-label="Command">git pull</td><td data-label="What it Does">Fetch from and integrate with another repository</td><td data-label="Example">git pull origin main</td></tr>
-    <tr><td data-label="Command">git push origin &lt;branch&gt;</td><td data-label="What it Does">Push a branch to remote</td><td data-label="Example">git push origin master</td></tr>
-    <tr><td data-label="Command">git push -u origin &lt;branch&gt;</td><td data-label="What it Does">Push & track remote branch</td><td data-label="Example">git push -u origin feature-x</td></tr>
-    <tr><td data-label="Command">git push --all origin</td><td data-label="What it Does">Push all local branches to remote</td><td data-label="Example">git push --all origin</td></tr>
-    <tr><td data-label="Command">git push origin --delete &lt;branch&gt;</td><td data-label="What it Does">Delete a remote branch</td><td data-label="Example">git push origin --delete feature-x</td></tr>
+  <!-- PUSH / PULL / FETCH -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🚀 Push / Pull / Fetch</td></tr>
+  <tr><td data-label="Command">git fetch</td><td data-label="What it Does">Download objects and refs from another repository</td><td data-label="Example">git fetch origin</td></tr>
+  <tr><td data-label="Command">git pull origin &lt;branch&gt;</td><td data-label="What it Does">Fetch & merge remote changes</td><td data-label="Example">git pull origin master</td></tr>
+  <tr><td data-label="Command">git pull</td><td data-label="What it Does">Fetch from and integrate with another repository</td><td data-label="Example">git pull origin main</td></tr>
+  <tr><td data-label="Command">git push origin &lt;branch&gt;</td><td data-label="What it Does">Push a branch to remote</td><td data-label="Example">git push origin master</td></tr>
+  <tr><td data-label="Command">git push -u origin &lt;branch&gt;</td><td data-label="What it Does">Push & track remote branch</td><td data-label="Example">git push -u origin feature-x</td></tr>
+  <tr><td data-label="Command">git push --all origin</td><td data-label="What it Does">Push all local branches to remote</td><td data-label="Example">git push --all origin</td></tr>
+  <tr><td data-label="Command">git push origin --delete &lt;branch&gt;</td><td data-label="What it Does">Delete a remote branch</td><td data-label="Example">git push origin --delete feature-x</td></tr>
 
-    <!-- BACKFILL -->
-    <tr><td data-label="Command">git backfill</td><td data-label="What it Does">Download missing objects in a partial clone</td><td data-label="Example">git backfill</td></tr>
+  <!-- BACKFILL -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🔄 Backfill</td></tr>
+  <tr><td data-label="Command">git backfill</td><td data-label="What it Does">Download missing objects in a partial clone</td><td data-label="Example">git backfill</td></tr>
 
-    <!-- CHECKOUT SPECIFIC COMMIT -->
-    <tr><td data-label="Command">git checkout &lt;commit-id&gt;</td><td data-label="What it Does">Switch to a specific commit (detached HEAD)</td><td data-label="Example">git checkout 5b5139a</td></tr>
+  <!-- CHECKOUT SPECIFIC COMMIT -->
+  <tr><td colspan="3" style="text-align:center; font-weight:bold;">🔎 Checkout Specific Commit</td></tr>
+  <tr><td data-label="Command">git checkout &lt;commit-id&gt;</td><td data-label="What it Does">Switch to a specific commit (detached HEAD)</td><td data-label="Example">git checkout 5b5139a</td></tr>
+<!-- CONFIG LISTING -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">⚙️ Git Configuration Utilities</td></tr>
+<tr><td data-label="Command">git config --list</td><td data-label="What it Does">List all Git configurations</td><td data-label="Example">git config --list</td></tr>
 
-  </tbody>
+<!-- CLEANING -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">🧹 Cleaning Up</td></tr>
+<tr><td data-label="Command">git clean -n</td><td data-label="What it Does">Show files that would be removed (dry run)</td><td data-label="Example">git clean -n</td></tr>
+<tr><td data-label="Command">git clean -f</td><td data-label="What it Does">Remove untracked files from the working directory</td><td data-label="Example">git clean -f</td></tr>
+
+<!-- FETCH & PRUNE -->
+<tr><td data-label="Command">git fetch -p</td><td data-label="What it Does">Prune deleted remote branches</td><td data-label="Example">git fetch -p</td></tr>
+
+<!-- AMEND -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">✏️ Amend a Commit</td></tr>
+<tr><td data-label="Command">git commit --amend</td><td data-label="What it Does">Modify the last commit (message or files)</td><td data-label="Example">git commit --amend -m "Updated message"</td></tr>
+
+<!-- CHERRY PICK -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">🍒 Cherry Pick</td></tr>
+<tr><td data-label="Command">git cherry-pick &lt;commit-id&gt;</td><td data-label="What it Does">Apply a commit from another branch</td><td data-label="Example">git cherry-pick a1b2c3d</td></tr>
+
+<!-- REVERT RANGE -->
+<tr><td data-label="Command">git revert HEAD~2..HEAD</td><td data-label="What it Does">Revert a range of commits</td><td data-label="Example">git revert HEAD~2..HEAD</td></tr>
+
+<!-- ALIASES -->
+<tr><td colspan="3" style="text-align:center; font-weight:bold;">🏷️ Git Aliases</td></tr>
+<tr><td data-label="Command">git config --global alias.co checkout</td><td data-label="What it Does">Create a shortcut (alias) for a command</td><td data-label="Example">git co master</td></tr>
+
+</tbody>
+
 </table>
 
 
@@ -204,12 +250,18 @@
       });
     }
   </script>
-<footer style="text-align: center; margin-top: 40px; font-size: 14px; color: #555;">
+<footer style="text-align: center; margin-top: 40px; font-size: 14px; color: #333; font-family: 'Segoe UI', sans-serif;">
   Made with ❤️ by 
-  <a href="https://www.linkedin.com/in/manoj-rashinkar-82a4841b0/" target="_blank" style="color: #0073b1; text-decoration: none;">
+  <a href="https://www.linkedin.com/in/manoj-rashinkar-82a4841b0/" target="_blank" style="color: #0073b1; font-weight: 600; text-decoration: none;">
     Manoj Rashinkar
   </a>
+  <div style="margin-top: 6px;">
+    <a href="https://manojrashinkar-portfolio.netlify.app/" target="_blank" style="color: #0073b1; text-decoration: none; font-size: 13px;">
+      🌐 Visit My Portfolio
+    </a>
+  </div>
 </footer>
+
 
 </body>
 </html>
