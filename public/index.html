@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Git Commands Tutorial</title>
+  <script>
+  // Ping visitor count when someone visits the home page
+  fetch('/.netlify/functions/visitorCount')
+    .then(() => console.log("Visitor counted"))
+    .catch(() => console.log("Visitor count failed"));
+</script>
   <style>
     body {
       font-family: Arial, sans-serif;
