@@ -1,0 +1,11 @@
+[build]
+  publish = "public"              # Folder where your static site files (HTML, CSS, JS) live
+  functions = "netlify/functions" # Folder for Netlify serverless functions
+
+[functions]
+  node_bundler = "esbuild"        # Optional: Faster bundling (recommended)
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

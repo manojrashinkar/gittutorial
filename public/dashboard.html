@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - Visitor Count</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #visitorCount {
+      font-size: 28px;
+      font-weight: bold;
+      color: #2a9d8f;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .auth-box {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-box" id="loginBox">
+    <h2>Admin Access</h2>
+    <input type="password" id="password" placeholder="Enter password" />
+    <br />
+    <button onclick="checkPassword()">Login</button>
+    <p id="error" style="color:red;"></p>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <h1>📊 Website Visitor Dashboard</h1>
+    <div id="visitorCount">Loading...</div>
+  </div>
+
+  <script>
+    const correctPassword = "letmein123"; // 🔒 Change this!
+
+    function checkPassword() {
+      const entered = document.getElementById("password").value;
+      if (entered === correctPassword) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").classList.remove("hidden");
+        loadVisitorCount();
+      } else {
+        document.getElementById("error").textContent = "Incorrect password";
+      }
+    }
+
+    function loadVisitorCount() {
+      fetch('/.netlify/functions/visitorCount')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('visitorCount').textContent =
+            `Total Visitors: ${data.count}`;
+        })
+        .catch(() => {
+          document.getElementById('visitorCount').textContent =
+            "Error loading data.";
+        });
+    }
+  </script>
+</body>
+</html>
