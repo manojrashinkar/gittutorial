@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Git Commands Tutorial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .search-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      color: #333;
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.5);
+      font-weight: bold;
+      backdrop-filter: blur(5px);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Mobile Responsive Styling */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.3);
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      td {
+        padding: 10px;
+        border: none;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Git Commands Cheat Sheet</h1>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search Git command, action or example...">
+  </div>
+
+  <table id="gitTable">
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>What it Does</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td data-label="Command">git config --global user.name "Name"</td><td data-label="What it Does">Set your Git username globally</td><td data-label="Example">git config --global user.name "Manoj"</td></tr>
+      <tr><td data-label="Command">git config --global user.email "email@example.com"</td><td data-label="What it Does">Set your Git email globally</td><td data-label="Example">git config --global user.email "manoj@example.com"</td></tr>
+      <tr><td data-label="Command">git init</td><td data-label="What it Does">Initialize a new Git repository</td><td data-label="Example">git init</td></tr>
+      <tr><td data-label="Command">git clone &lt;repo-url&gt;</td><td data-label="What it Does">Clone a remote repository locally</td><td data-label="Example">git clone https://github.com/user/repo.git</td></tr>
+      <tr><td data-label="Command">git status</td><td data-label="What it Does">Show current repo status (changes, branch)</td><td data-label="Example">git status</td></tr>
+      <tr><td data-label="Command">git add &lt;file&gt;</td><td data-label="What it Does">Stage a file for commit</td><td data-label="Example">git add README.md</td></tr>
+      <tr><td data-label="Command">git add .</td><td data-label="What it Does">Stage all changes</td><td data-label="Example">git add .</td></tr>
+      <tr><td data-label="Command">git commit -m "message"</td><td data-label="What it Does">Commit staged changes with message</td><td data-label="Example">git commit -m "Initial commit"</td></tr>
+      <tr><td data-label="Command">git log</td><td data-label="What it Does">Show commit history</td><td data-label="Example">git log</td></tr>
+      <tr><td data-label="Command">git log --oneline --all</td><td data-label="What it Does">Show all commits in all branches, brief</td><td data-label="Example">git log --oneline --all</td></tr>
+      <tr><td data-label="Command">git checkout &lt;commit-id&gt;</td><td data-label="What it Does">Switch to a specific commit (detached HEAD)</td><td data-label="Example">git checkout 5b5139a</td></tr>
+      <tr><td data-label="Command">git checkout &lt;branch-name&gt;</td><td data-label="What it Does">Switch to a branch</td><td data-label="Example">git checkout master</td></tr>
+      <tr><td data-label="Command">git checkout -b &lt;new-branch&gt;</td><td data-label="What it Does">Create and switch to new branch</td><td data-label="Example">git checkout -b feature-x</td></tr>
+      <tr><td data-label="Command">git branch</td><td data-label="What it Does">List all local branches</td><td data-label="Example">git branch</td></tr>
+      <tr><td data-label="Command">git branch -d &lt;branch-name&gt;</td><td data-label="What it Does">Delete a local branch</td><td data-label="Example">git branch -d feature-x</td></tr>
+      <tr><td data-label="Command">git merge &lt;branch-name&gt;</td><td data-label="What it Does">Merge another branch into current</td><td data-label="Example">git merge feature-x</td></tr>
+      <tr><td data-label="Command">git revert &lt;commit-id&gt;</td><td data-label="What it Does">Undo a commit by creating a new commit</td><td data-label="Example">git revert 5b5139a</td></tr>
+      <tr><td data-label="Command">git reset --hard &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, discard changes</td><td data-label="Example">git reset --hard 5b5139a</td></tr>
+      <tr><td data-label="Command">git reset --soft &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep staged changes</td><td data-label="Example">git reset --soft 5b5139a</td></tr>
+      <tr><td data-label="Command">git reset --mixed &lt;commit-id&gt;</td><td data-label="What it Does">Move branch pointer, keep unstaged changes</td><td data-label="Example">git reset --mixed 5b5139a</td></tr>
+      <tr><td data-label="Command">git reflog</td><td data-label="What it Does">Show recent HEAD movements (recover commits)</td><td data-label="Example">git reflog</td></tr>
+      <tr><td data-label="Command">git stash</td><td data-label="What it Does">Temporarily save uncommitted changes</td><td data-label="Example">git stash</td></tr>
+      <tr><td data-label="Command">git stash pop</td><td data-label="What it Does">Apply stashed changes back</td><td data-label="Example">git stash pop</td></tr>
+      <tr><td data-label="Command">git remote -v</td><td data-label="What it Does">Show remote repository URLs</td><td data-label="Example">git remote -v</td></tr>
+      <tr><td data-label="Command">git push origin &lt;branch&gt;</td><td data-label="What it Does">Push a branch to remote</td><td data-label="Example">git push origin master</td></tr>
+      <tr><td data-label="Command">git push -u origin &lt;branch&gt;</td><td data-label="What it Does">Push & track remote branch</td><td data-label="Example">git push -u origin feature-x</td></tr>
+      <tr><td data-label="Command">git push --all origin</td><td data-label="What it Does">Push all local branches to remote</td><td data-label="Example">git push --all origin</td></tr>
+      <tr><td data-label="Command">git push origin --delete &lt;branch&gt;</td><td data-label="What it Does">Delete a remote branch</td><td data-label="Example">git push origin --delete feature-x</td></tr>
+      <tr><td data-label="Command">git pull origin &lt;branch&gt;</td><td data-label="What it Does">Fetch & merge remote changes</td><td data-label="Example">git pull origin master</td></tr>
+      <tr><td data-label="Command">git tag &lt;tagname&gt;</td><td data-label="What it Does">Create a tag</td><td data-label="Example">git tag v1.0 + git push origin v1.0</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    function filterTable() {
+      const input = document.getElementById("searchInput");
+      const filter = input.value.toLowerCase();
+      const rows = document.querySelectorAll("#gitTable tbody tr");
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        let match = false;
+        cells.forEach(cell => {
+          if (cell.innerText.toLowerCase().includes(filter)) {
+            match = true;
+          }
+        });
+        row.style.display = match ? "" : "none";
+      });
+    }
+  </script>
+<footer style="text-align: center; margin-top: 40px; font-size: 14px; color: #555;">
+  Made with ❤️ by 
+  <a href="https://www.linkedin.com/in/manoj-rashinkar-82a4841b0/" target="_blank" style="color: #0073b1; text-decoration: none;">
+    Manoj Rashinkar
+  </a>
+</footer>
+
+</body>
+</html>
