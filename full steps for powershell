@@ -1,0 +1,92 @@
+Yes 👍 you can also fetch Gmail emails using PowerShell with an App Password via IMAP.
+This is useful if you don’t want to build a Streamlit app and just want to pull + save emails into CSV directly from PowerShell.
+
+
+---
+
+🔹 Prerequisites
+
+1. Enable 2-Step Verification on your Google account.
+
+
+2. Create an App Password (Security → App passwords → Mail → Other).
+
+
+3. Copy the 16-character app password.
+
+
+4. In PowerShell, we’ll use .NET’s System.Net.Sockets with IMAP or a helper module like MailKit (recommended).
+
+
+
+
+---
+
+🔹 Option 1: Using MailKit (Best Choice)
+
+Install the MailKit library for PowerShell:
+
+Install-Package -Name 'MailKit' -Source nuget.org
+
+Script: Fetch latest emails & save to CSV
+
+Add-Type -Path (Join-Path (Get-Package MailKit).Source "lib/netstandard2.0/MailKit.dll")
+
+# Gmail credentials
+$user = "your_email@gmail.com"
+$appPassword = "your_app_password"
+
+# Output CSV path
+$outFile = "C:\Users\Public\emails.csv"
+
+# Create IMAP client
+$client = New-Object MailKit.Net.Imap.ImapClient
+$client.Connect("imap.gmail.com", 993, $true)
+$client.Authenticate($user, $appPassword)
+
+# Open inbox
+$inbox = $client.Inbox
+$inbox.Open([MailKit.FolderAccess]::ReadOnly)
+
+# Fetch last 10 messages
+$messages = $inbox.Fetch(($inbox.Count-10)..($inbox.Count-1), [MailKit.MessageSummaryItems]::Full)
+
+$result = foreach ($msg in $messages) {
+    [PSCustomObject]@{
+        From    = $msg.Envelope.From.ToString()
+        Subject = $msg.Envelope.Subject
+        Date    = $msg.Envelope.Date
+    }
+}
+
+# Save to CSV
+$result | Export-Csv -Path $outFile -NoTypeInformation -Encoding UTF8
+
+Write-Host "Saved $($result.Count) emails to $outFile"
+
+$client.Disconnect($true)
+
+
+---
+
+🔹 Option 2: Using Native PowerShell (No extra libs)
+
+PowerShell by itself doesn’t have good IMAP libraries. You’d need to use System.Net.Sockets.TcpClient and manually send IMAP commands (LOGIN, FETCH etc.), which works but is much more complex and brittle.
+
+
+---
+
+🔹 Summary
+
+✅ If you want a quick + reliable method → use MailKit in PowerShell.
+
+✅ You can then read Gmail with App Password, fetch inbox, and save to CSV.
+
+⚠️ If you plan to filter emails or summarize body text, PowerShell is possible but much easier in Python (Streamlit style).
+
+
+
+---
+
+👉 Do you want me to extend this PowerShell script so it also fetches the email body + generates a short summary before saving to CSV (like in your Python/Streamlit version)?
+
