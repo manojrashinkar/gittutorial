@@ -1,0 +1,265 @@
+Good question 🙌 — before the Streamlit Gmail Inbox App will run, you need to set up a few things in Google Cloud Console and locally on your machine. Here’s a checklist so you don’t miss anything:
+
+
+---
+
+🔹 Step 1: Create a Google Cloud Project
+
+1. Go to Google Cloud Console.
+
+
+2. Create a new project (name it e.g. GmailScraper).
+
+
+3. Make sure your Gmail account is linked to this project.
+
+
+
+
+---
+
+🔹 Step 2: Enable Gmail API
+
+1. In your project → APIs & Services → Library.
+
+
+2. Search for Gmail API.
+
+
+3. Click Enable.
+
+
+
+
+---
+
+🔹 Step 3: Create OAuth 2.0 Credentials
+
+1. Go to APIs & Services → Credentials.
+
+
+2. Click + Create Credentials → OAuth client ID.
+
+
+3. Select Application type: Desktop App.
+
+
+4. Give it a name (e.g. Streamlit Gmail Client).
+
+
+5. Click Create → Download the credentials.json file.
+
+Place it in the same folder as your app.py.
+
+
+
+
+⚠️ Keep this file safe — it contains sensitive info.
+
+
+---
+
+🔹 Step 4: Configure OAuth Consent Screen
+
+1. In Cloud Console → APIs & Services → OAuth Consent Screen.
+
+
+2. Choose External (if it’s just for you, that’s fine).
+
+
+3. Fill in App name, email, developer email.
+
+
+4. Add scope:
+
+https://www.googleapis.com/auth/gmail.readonly (already in code).
+
+
+
+5. Save and Publish (you don’t need verification if only your account uses it).
+
+
+
+
+---
+
+🔹 Step 5: First Run (OAuth Flow)
+
+1. Run:
+
+streamlit run app.py
+
+
+2. The first time → A browser window will open asking you to log into Gmail and grant permissions.
+
+
+3. It creates a token.json file in the same folder.
+
+This stores your access/refresh tokens.
+
+Next time you run → it won’t ask again.
+
+
+
+
+
+---
+
+🔹 Step 6: Install Dependencies
+
+Make sure you installed everything:
+
+pip install streamlit google-api-python-client google-auth-httplib2 google-auth-oauthlib sumy pandas
+
+
+---
+
+🔹 After Setup
+
+Open http://localhost:8501 in browser.
+
+Enter how many emails you want → click Fetch Emails.
+
+View your inbox + summaries.
+
+Download as CSV with one click.
+
+
+
+---
+
+⚠️ Important Notes
+
+Only your Gmail will be accessible (since you log in).
+
+If you want to use this on another machine, copy both credentials.json and token.json.
+
+Never share these files publicly.
+
+
+
+---
+
+👉 Do you want me to also add a search bar inside Streamlit (so you can filter emails by keyword, e.g. “invoice” or “meeting”)?
+
+
+
+
+
+install maad
+
+pip install streamlit google-api-python-client google-auth-httplib2 google-auth-oauthlib sumy pandas
+
+
+
+code
+
+
+import os, base64, csv, streamlit as st
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+import pandas as pd
+
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+
+# ------------------------------
+# Summarizer function
+# ------------------------------
+def summarize_text(text, sentences_count=3):
+    if not text.strip():
+        return "(empty body)"
+    parser = PlaintextParser.from_string(text, Tokenizer("english"))
+    summarizer = LsaSummarizer()
+    summary = summarizer(parser.document, sentences_count)
+    return " ".join([str(s) for s in summary])
+
+# ------------------------------
+# Extract Gmail body
+# ------------------------------
+def get_body(payload):
+    body = ""
+    if 'parts' in payload:
+        for part in payload['parts']:
+            if part['mimeType'] in ['text/plain', 'text/html']:
+                data = part['body'].get('data')
+                if data:
+                    body = base64.urlsafe_b64decode(data).decode('utf-8', errors="ignore")
+                    return body
+            if 'parts' in part:  # nested parts
+                body = get_body(part)
+                if body:
+                    return body
+    else:
+        data = payload['body'].get('data')
+        if data:
+            body = base64.urlsafe_b64decode(data).decode('utf-8', errors="ignore")
+    return body
+
+# ------------------------------
+# Gmail fetch function
+# ------------------------------
+def fetch_emails(max_results=10):
+    creds = None
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    service = build('gmail', 'v1', credentials=creds)
+
+    results = service.users().messages().list(
+        userId='me', maxResults=max_results, q='in:inbox').execute()
+    messages = results.get('messages', [])
+
+    rows = []
+    for m in messages:
+        msg = service.users().messages().get(
+            userId='me', id=m['id'], format='full').execute()
+
+        headers = {h['name']: h['value'] for h in msg['payload'].get('headers', [])}
+        subject = headers.get('Subject', '(no subject)')
+        sender = headers.get('From', '(unknown sender)')
+        date = headers.get('Date', '(no date)')
+        body = get_body(msg['payload'])
+        summary = summarize_text(body, sentences_count=2)
+
+        rows.append([sender, subject, date, body, summary])
+
+    return rows
+
+# ------------------------------
+# Streamlit UI
+# ------------------------------
+st.title("📧 Gmail Inbox Scraper & Summarizer")
+
+max_results = st.slider("How many emails to fetch?", 5, 50, 10)
+
+if st.button("Fetch Emails"):
+    with st.spinner("Fetching emails..."):
+        emails = fetch_emails(max_results)
+        df = pd.DataFrame(emails, columns=["From", "Subject", "Date", "Body", "Summary"])
+        st.success(f"Fetched {len(df)} emails!")
+
+        st.dataframe(df[["From", "Subject", "Date", "Summary"]])  # show clean view
+
+        # Allow download as CSV
+        csv_data = df.to_csv(index=False).encode("utf-8")
+        st.download_button(
+            "💾 Download CSV",
+            csv_data,
+            "emails.csv",
+            "text/csv",
+            key="download-csv"
+        )
