@@ -27,16 +27,6 @@ import streamlit as st
 import imaplib, email
 from email.header import decode_header
 import pandas as pd
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer
-
-# --- summarizer ---
-def summarize_text(text, sentences_count=2):
-    parser = PlaintextParser.from_string(text, Tokenizer("english"))
-    summarizer = LsaSummarizer()
-    summary = summarizer(parser.document, sentences_count)
-    return " ".join([str(s) for s in summary])
 
 # --- fetch emails via IMAP + app password ---
 def fetch_emails(user, app_password, limit=10):
@@ -73,16 +63,15 @@ def fetch_emails(user, app_password, limit=10):
                     except:
                         pass
         else:
-            body = msg.get_payload(decode=True).decode(errors="ignore")
-
-        # --- summary ---
-        summary = summarize_text(body) if body else ""
+            try:
+                body = msg.get_payload(decode=True).decode(errors="ignore")
+            except:
+                pass
 
         emails.append({
             "From": from_,
             "Subject": subject,
-            "Body": body,
-            "Summary": summary
+            "Body": body
         })
 
     mail.logout()
@@ -104,51 +93,12 @@ if submitted:
         try:
             df = fetch_emails(user, app_password, limit)
             st.success(f"Fetched {len(df)} emails ✅")
-            st.dataframe(df[["From", "Subject", "Summary"]])
+
+            # Show all columns including Body
+            st.dataframe(df)
 
             # Download as CSV
             csv = df.to_csv(index=False).encode("utf-8")
             st.download_button("💾 Download CSV", csv, "emails.csv", "text/csv")
         except Exception as e:
             st.error(f"Error: {e}")
-
-
----
-
-3. Run the app
-
-streamlit run app.py
-
-
----
-
-4. Usage
-
-Enter your Gmail address + App Password (not your main password — create from Google Account → Security → App Passwords).
-
-Enter how many emails to fetch.
-
-Click Fetch Emails.
-
-You’ll see From, Subject, and a short Summary.
-
-Click Download CSV to save everything (From, Subject, Body, Summary).
-
-
-
----
-
-⚠️ Notes:
-
-App password requires 2-Step Verification enabled in your Google account.
-
-Works best for personal/local use. For cloud deployment (Streamlit Cloud), OAuth is safer.
-
-Don’t share the app password — it bypasses 2FA for your mailbox.
-
-
-
----
-
-👉 Do you want me to also add a search filter box in Streamlit so you can type e.g. “invoice” and only show matching emails before saving CSV?
-
