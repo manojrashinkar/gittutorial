@@ -1,6 +1,13 @@
-Got it 👍 You want the same Streamlit app as before (inbox + body summary + save to CSV), but instead of OAuth → use Gmail App Password (IMAP).
+folder
 
-Here’s a working example:
+openthat  folder and write cmd on top 
+
+
+cmd prompt will open 
+
+type : python -m venv env 
+
+env\Scripts\activate
 
 
 ---
